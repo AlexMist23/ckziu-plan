@@ -20,7 +20,7 @@ type ScheduleData = {
 };
 
 async function fetchScheduleData(): Promise<ScheduleData> {
-  const response = await fetch("/api/schedule");
+  const response = await fetch("https://ckziu-plan.vercel.app/");
   if (!response.ok) {
     throw new Error("Failed to fetch schedule data");
   }
