@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { NextResponse } from "next/server";
+export const dynamic = "force-static";
 
 type ClassInfo = {
   Subject: string;
@@ -25,10 +25,10 @@ export async function GET() {
       "utf8"
     );
     const data: ScheduleData = JSON.parse(fileContents);
-    return NextResponse.json(data);
+    return Response.json(data);
   } catch (error) {
     console.error("Error reading schedule data:", error);
-    return NextResponse.json(
+    return Response.json(
       { error: "Failed to load schedule data" },
       { status: 500 }
     );

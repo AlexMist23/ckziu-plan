@@ -19,8 +19,8 @@ type ScheduleData = {
   [date: string]: DaySchedule;
 };
 
-async function fetchScheduleData(): Promise<ScheduleData> {
-  const response = await fetch("https://ckziu-plan.vercel.app/api/schedule");
+async function fetchScheduleData(url: string): Promise<ScheduleData> {
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch schedule data");
   }
@@ -35,7 +35,7 @@ async function fetchScheduleData(): Promise<ScheduleData> {
 }
 
 export default function ClassSchedule() {
-  const scheduleData = use(fetchScheduleData());
+  const scheduleData = use(fetchScheduleData('/api/schedule'));
   const dates = Object.keys(scheduleData);
 
   return (
