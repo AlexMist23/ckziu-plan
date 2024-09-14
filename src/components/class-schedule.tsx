@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use } from "react";
+import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import scheduleData from "@/lib/scheduleData";
 import ScheduleTable from "./schedule-table";

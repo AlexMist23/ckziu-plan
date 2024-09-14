@@ -24,7 +24,7 @@ type DaySchedule = {
 type TableData = {
   [date: string]: DaySchedule;
 };
-export default function ScheduleTable({
+export default function  ScheduleTable({
   data,
   date,
 }: {
