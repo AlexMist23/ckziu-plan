@@ -22,14 +22,13 @@ type ScheduleData = {
 async function fetchScheduleData(url: string): Promise<ScheduleData> {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Failed to fetch schedule data");
+    console.error("Failed to parse JSON", response.status);
   }
   let responseJSON = null;
   try {
     responseJSON = response.json();
   } catch (error) {
     console.error("Failed to parse JSON", error);
-    throw error;
   }
   return responseJSON;
 }
