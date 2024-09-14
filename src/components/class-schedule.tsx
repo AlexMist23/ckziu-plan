@@ -20,7 +20,10 @@ type ScheduleData = {
 };
 
 async function fetchScheduleData(): Promise<ScheduleData> {
-  const response = await fetch("/schedule.json");
+  const response = await fetch("/api/schedule");
+  if (!response.ok) {
+    throw new Error("Failed to fetch schedule data");
+  }
   return response.json();
 }
 
