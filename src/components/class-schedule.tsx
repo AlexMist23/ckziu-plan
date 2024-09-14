@@ -2,39 +2,39 @@
 
 import React, { use } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import scheduleData from "@/lib/scheduleData";
 import ScheduleTable from "./schedule-table";
 
-type ClassInfo = {
-  Subject: string;
-  Teacher_Initials: string;
-  Location: number;
-  Time: [string, string];
-};
-
-type DaySchedule = {
-  [key: string]: ClassInfo[];
-};
-
-type ScheduleData = {
-  [date: string]: DaySchedule;
-};
-
-async function fetchScheduleData(url: string): Promise<ScheduleData> {
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.error("Failed to parse JSON", response.status);
-  }
-  let responseJSON = null;
-  try {
-    responseJSON = response.json();
-  } catch (error) {
-    console.error("Failed to parse JSON", error);
-  }
-  return responseJSON;
-}
+// type ClassInfo = {
+//   Subject: string;
+//   Teacher_Initials: string;
+//   Location: number;
+//   Time: [string, string];
+// };
+//
+// type DaySchedule = {
+//   [key: string]: ClassInfo[];
+// };
+//
+// type ScheduleData = {
+//   [date: string]: DaySchedule;
+// };
+//
+// async function fetchScheduleData(url: string): Promise<ScheduleData> {
+//   const response = await fetch(url);
+//   if (!response.ok) {
+//     console.error("Failed to parse JSON", response.status);
+//   }
+//   let responseJSON = null;
+//   try {
+//     responseJSON = response.json();
+//   } catch (error) {
+//     console.error("Failed to parse JSON", error);
+//   }
+//   return responseJSON;
+// }
 
 export default function ClassSchedule() {
-  const scheduleData = use(fetchScheduleData('/api/schedule'));
   const dates = Object.keys(scheduleData);
 
   return (
