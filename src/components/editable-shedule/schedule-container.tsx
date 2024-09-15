@@ -1,32 +1,16 @@
 import { Suspense } from "react";
 import EditableSchedule from "./schedule";
 import { getData } from "./actions";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 
 export default async function Schedule() {
   const data = await getData();
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="max-w-[60rem] mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Class Schedule</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Plan Zajęć</CardTitle>
-            <CardDescription>
-              Dane z: https://ckziu1.gda.pl/plan-zajec#lo-tryb-zaoczny
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EditableSchedule initialData={data} />
-          </CardContent>
-        </Card>
+      <Suspense fallback={<Skeleton className="w-full h-[420px]" />}>
+        <EditableSchedule initialData={data} />
       </Suspense>
     </div>
   );
