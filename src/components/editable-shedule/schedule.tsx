@@ -11,7 +11,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { saveData } from "./actions";
 import { LucideClock, LucideDoorClosed, LucideUser } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
@@ -107,7 +106,10 @@ export default function DateTabbedEditableSchedule({
       <TabsList>
         {sortedDates.map((date) => (
           <TabsTrigger key={date} value={date}>
-            {new Date(date).toLocaleDateString()}
+            {new Date(date).toLocaleDateString("pl-PL", {
+              day: "2-digit",
+              month: "short",
+            })}
           </TabsTrigger>
         ))}
       </TabsList>
@@ -119,15 +121,15 @@ export default function DateTabbedEditableSchedule({
                 <TableHeader>
                   <TableRow>
                     <TableHead>#</TableHead>
-                    <TableHead>Przedmiot</TableHead>
                     <TableHead>
-                      <LucideUser />
+                      <LucideClock />
                     </TableHead>
+                    <TableHead>Przedmiot</TableHead>
                     <TableHead>
                       <LucideDoorClosed />
                     </TableHead>
                     <TableHead>
-                      <LucideClock />
+                      <LucideUser />
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -136,6 +138,7 @@ export default function DateTabbedEditableSchedule({
                     lessons.map((lesson, index) => (
                       <TableRow key={`${date}-${period}-${index}`}>
                         <TableCell>{period}</TableCell>
+                        <TableCell>{`${lesson.Time[0]} - ${lesson.Time[1]}`}</TableCell>
                         <TableCell>
                           {editingCell?.date === date &&
                           editingCell?.period === period &&
@@ -164,6 +167,37 @@ export default function DateTabbedEditableSchedule({
                             </span>
                           )}
                         </TableCell>
+
+                        <TableCell>
+                          {editingCell?.date === date &&
+                          editingCell?.period === period &&
+                          editingCell?.index === index &&
+                          editingCell?.field === "Location" ? (
+                            <Input
+                              type="number"
+                              value={lesson.Location}
+                              onChange={(e) =>
+                                handleChange(
+                                  date,
+                                  period,
+                                  index,
+                                  "Location",
+                                  e.target.value
+                                )
+                              }
+                              onBlur={handleSave}
+                            />
+                          ) : (
+                            <span
+                              onClick={() =>
+                                handleEdit(date, period, index, "Location")
+                              }
+                            >
+                              {lesson.Location}
+                            </span>
+                          )}
+                        </TableCell>
+
                         <TableCell>
                           {editingCell?.date === date &&
                           editingCell?.period === period &&
@@ -196,45 +230,6 @@ export default function DateTabbedEditableSchedule({
                               {lesson.Teacher_Initials}
                             </span>
                           )}
-                        </TableCell>
-                        <TableCell>
-                          {editingCell?.date === date &&
-                          editingCell?.period === period &&
-                          editingCell?.index === index &&
-                          editingCell?.field === "Location" ? (
-                            <Input
-                              type="number"
-                              value={lesson.Location}
-                              onChange={(e) =>
-                                handleChange(
-                                  date,
-                                  period,
-                                  index,
-                                  "Location",
-                                  e.target.value
-                                )
-                              }
-                              onBlur={handleSave}
-                            />
-                          ) : (
-                            <span
-                              onClick={() =>
-                                handleEdit(date, period, index, "Location")
-                              }
-                            >
-                              {lesson.Location}
-                            </span>
-                          )}
-                        </TableCell>
-                        <TableCell>{`${lesson.Time[0]} - ${lesson.Time[1]}`}</TableCell>
-                        <TableCell>
-                          <Button
-                            onClick={() =>
-                              handleEdit(date, period, index, "Subject")
-                            }
-                          >
-                            Edit
-                          </Button>
                         </TableCell>
                       </TableRow>
                     ))

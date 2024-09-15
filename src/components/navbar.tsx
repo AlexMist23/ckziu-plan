@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import IconCkziu1Logo from "./icons/ckziu1-logo";
 
 export function NavbarSpacer() {
-  return <div className="h-16" />; // This matches the height of the navbar
+  return <div className="h-14" />; // This matches the height of the navbar
 }
 
 export function Navbar() {
@@ -37,7 +37,11 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/schedule", label: "Plan" },
-    { href: "/about", label: "Notatki" },
+    { href: "/abs-calc", label: "Kalkulator frekwencji" },
+    { href: "/notes", label: "Notatki" },
+    { href: "/resources", label: "Książki" },
+    { href: "/teachers", label: "Nauczyciele" },
+    
   ];
 
   return (
@@ -48,7 +52,7 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
               <div className="flex flex-row justify-center align-middle text-2xl font-bold gap-1">
@@ -65,8 +69,8 @@ export function Navbar() {
                     className={cn(
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors",
                       pathname === link.href
-                        ? "bg-accent text-accent-foreground"
-                        : "text-foreground hover:bg-accent hover:text-accent-foreground"
+                        ? "text-foreground"
+                        : "hover:text-accent-foreground text-foreground/60"
                     )}
                   >
                     {link.label}
