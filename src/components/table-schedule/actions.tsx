@@ -9,13 +9,13 @@ type DataItem = {
   email: string;
 };
 
-const filePath = path.join(process.cwd(), "public", "data.json");
-
+const fullPath = path.join(process.cwd(), "public", "data.json");
 export async function getData(): Promise<DataItem[]> {
-  const jsonData = await fs.readFile(filePath, "utf8");
+
+  const jsonData = await fs.readFile(fullPath, "utf8");
   return JSON.parse(jsonData);
 }
 
 export async function saveData(data: DataItem[]): Promise<void> {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf8");
+  await fs.writeFile(fullPath, JSON.stringify(data, null, 2), "utf8");
 }

@@ -34,11 +34,8 @@ export function Navbar() {
                 >
                   Plan
                 </Link>
-                <Link
-                  href="/about"
-                  className="px-3 py-2 text-sm font-medium"
-                >
-                  About
+                <Link href="/about" className="px-3 py-2 text-sm font-medium">
+                  Notatki
                 </Link>
               </div>
             </div>

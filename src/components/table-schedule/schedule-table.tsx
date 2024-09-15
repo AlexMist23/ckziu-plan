@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { saveData } from "@/app/schedule/actions";
+import { saveData } from "./actions";
 
 type DataItem = {
   id: number;
