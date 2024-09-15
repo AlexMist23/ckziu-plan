@@ -1,44 +1,32 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { use, Suspense } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { ErrorBoundary } from "react-error-boundary";
+import { Skeleton } from "./ui/skeleton";
 
 type DataItem = {
-  id: number
-  name: string
-  email: string
+  id: number;
+  name: string;
+  email: string;
+};
+
+function fetchData(): Promise<DataItem[]> {
+  return fetch("/data.json").then((res) => {
+    if (!res.ok) throw new Error("Failed to fetch data");
+    return res.json();
+  });
 }
 
-export default function JsonTable() {
-  const [data, setData] = useState<DataItem[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    fetch('/data.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch data')
-        }
-        return response.json()
-      })
-      .then(jsonData => {
-        setData(jsonData)
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+function DataTable() {
+  const data = use(fetchData());
 
   return (
     <Table>
@@ -59,5 +47,26 @@ export default function JsonTable() {
         ))}
       </TableBody>
     </Table>
-  )
+  );
+}
+
+// Error Fallback component
+function ErrorFallback({ error }: { error: Error }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre style={{ color: "red" }}>{error.message}</pre>
+    </div>
+  );
+}
+
+// Main component that wraps everything with Suspense and ErrorBoundary
+export default function JsonTable() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={<Skeleton className="w-full h-full" />}>
+        <DataTable />
+      </Suspense>
+    </ErrorBoundary>
+  );
 }
