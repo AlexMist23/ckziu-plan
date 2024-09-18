@@ -114,130 +114,121 @@ export default function DateTabbedEditableSchedule({
         ))}
       </TabsList>
       {sortedDates.map((date) => (
-        <TabsContent key={date} value={date}>
-          <Card>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>#</TableHead>
-                    <TableHead>
-                      <LucideClock />
-                    </TableHead>
-                    <TableHead>Przedmiot</TableHead>
-                    <TableHead>
-                      <LucideDoorClosed />
-                    </TableHead>
-                    <TableHead>
-                      <LucideUser />
-                    </TableHead>
+        <TabsContent key={date} value={date} className="border rounded-s">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>#</TableHead>
+                <TableHead>
+                  <LucideClock />
+                </TableHead>
+                <TableHead>Przedmiot</TableHead>
+                <TableHead>
+                  <LucideDoorClosed />
+                </TableHead>
+                <TableHead>
+                  <LucideUser />
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Object.entries(data[date]).map(([period, lessons]) =>
+                lessons.map((lesson, index) => (
+                  <TableRow key={`${date}-${period}-${index}`}>
+                    <TableCell>{period}</TableCell>
+                    <TableCell>{`${lesson.Time[0]} - ${lesson.Time[1]}`}</TableCell>
+                    <TableCell>
+                      {editingCell?.date === date &&
+                      editingCell?.period === period &&
+                      editingCell?.index === index &&
+                      editingCell?.field === "Subject" ? (
+                        <Input
+                          value={lesson.Subject}
+                          onChange={(e) =>
+                            handleChange(
+                              date,
+                              period,
+                              index,
+                              "Subject",
+                              e.target.value
+                            )
+                          }
+                          onBlur={handleSave}
+                        />
+                      ) : (
+                        <span
+                          onClick={() =>
+                            handleEdit(date, period, index, "Subject")
+                          }
+                        >
+                          {lesson.Subject}
+                        </span>
+                      )}
+                    </TableCell>
+
+                    <TableCell>
+                      {editingCell?.date === date &&
+                      editingCell?.period === period &&
+                      editingCell?.index === index &&
+                      editingCell?.field === "Location" ? (
+                        <Input
+                          type="number"
+                          value={lesson.Location}
+                          onChange={(e) =>
+                            handleChange(
+                              date,
+                              period,
+                              index,
+                              "Location",
+                              e.target.value
+                            )
+                          }
+                          onBlur={handleSave}
+                        />
+                      ) : (
+                        <span
+                          onClick={() =>
+                            handleEdit(date, period, index, "Location")
+                          }
+                        >
+                          {lesson.Location}
+                        </span>
+                      )}
+                    </TableCell>
+
+                    <TableCell>
+                      {editingCell?.date === date &&
+                      editingCell?.period === period &&
+                      editingCell?.index === index &&
+                      editingCell?.field === "Teacher_Initials" ? (
+                        <Input
+                          value={lesson.Teacher_Initials}
+                          onChange={(e) =>
+                            handleChange(
+                              date,
+                              period,
+                              index,
+                              "Teacher_Initials",
+                              e.target.value
+                            )
+                          }
+                          onBlur={handleSave}
+                        />
+                      ) : (
+                        <span
+                          onClick={() =>
+                            handleEdit(date, period, index, "Teacher_Initials")
+                          }
+                        >
+                          {lesson.Teacher_Initials}
+                        </span>
+                      )}
+                    </TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {Object.entries(data[date]).map(([period, lessons]) =>
-                    lessons.map((lesson, index) => (
-                      <TableRow key={`${date}-${period}-${index}`}>
-                        <TableCell>{period}</TableCell>
-                        <TableCell>{`${lesson.Time[0]} - ${lesson.Time[1]}`}</TableCell>
-                        <TableCell>
-                          {editingCell?.date === date &&
-                          editingCell?.period === period &&
-                          editingCell?.index === index &&
-                          editingCell?.field === "Subject" ? (
-                            <Input
-                              value={lesson.Subject}
-                              onChange={(e) =>
-                                handleChange(
-                                  date,
-                                  period,
-                                  index,
-                                  "Subject",
-                                  e.target.value
-                                )
-                              }
-                              onBlur={handleSave}
-                            />
-                          ) : (
-                            <span
-                              onClick={() =>
-                                handleEdit(date, period, index, "Subject")
-                              }
-                            >
-                              {lesson.Subject}
-                            </span>
-                          )}
-                        </TableCell>
-
-                        <TableCell>
-                          {editingCell?.date === date &&
-                          editingCell?.period === period &&
-                          editingCell?.index === index &&
-                          editingCell?.field === "Location" ? (
-                            <Input
-                              type="number"
-                              value={lesson.Location}
-                              onChange={(e) =>
-                                handleChange(
-                                  date,
-                                  period,
-                                  index,
-                                  "Location",
-                                  e.target.value
-                                )
-                              }
-                              onBlur={handleSave}
-                            />
-                          ) : (
-                            <span
-                              onClick={() =>
-                                handleEdit(date, period, index, "Location")
-                              }
-                            >
-                              {lesson.Location}
-                            </span>
-                          )}
-                        </TableCell>
-
-                        <TableCell>
-                          {editingCell?.date === date &&
-                          editingCell?.period === period &&
-                          editingCell?.index === index &&
-                          editingCell?.field === "Teacher_Initials" ? (
-                            <Input
-                              value={lesson.Teacher_Initials}
-                              onChange={(e) =>
-                                handleChange(
-                                  date,
-                                  period,
-                                  index,
-                                  "Teacher_Initials",
-                                  e.target.value
-                                )
-                              }
-                              onBlur={handleSave}
-                            />
-                          ) : (
-                            <span
-                              onClick={() =>
-                                handleEdit(
-                                  date,
-                                  period,
-                                  index,
-                                  "Teacher_Initials"
-                                )
-                              }
-                            >
-                              {lesson.Teacher_Initials}
-                            </span>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  )}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                ))
+              )}
+            </TableBody>
+          </Table>
         </TabsContent>
       ))}
     </Tabs>
