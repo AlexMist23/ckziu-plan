@@ -8,7 +8,7 @@ export default async function Schedule() {
 
   return (
     <div className="max-w-[60rem] mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Plan Zajęć</h1>
+      <h1 className="text-3xl font-bold mb-4">Plan Zajęć</h1>{" "}
       <Suspense fallback={<Skeleton className="w-full h-[420px]" />}>
         <EditableSchedule initialData={data} />
       </Suspense>

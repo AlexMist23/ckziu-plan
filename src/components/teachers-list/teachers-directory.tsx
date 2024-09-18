@@ -180,7 +180,7 @@ export default function TeacherDirectory() {
                 <TableRow key={"2/" + index} className="md:hidden">
                   <TableCell className="text-background">
                     {"."}
-                    <span className="text-foreground absolute w-full cl">
+                    <span className="text-primary absolute w-full cl">
                       <a href={`mailto:${teacher["e-mail"]}}`}>
                         {teacher["e-mail"]}
                       </a>
