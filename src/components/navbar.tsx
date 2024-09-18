@@ -38,6 +38,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/schedule", label: "Plan" },
     { href: "/teachers", label: "Nauczyciele" },
+    { href: "/books", label: "Książki" },
     { href: "https://edu.gdansk.pl/", label: "EduDziennik" },
     {
       href: "https://ckziu1.gda.pl/plan-zajec#lo-tryb-zaoczny",
