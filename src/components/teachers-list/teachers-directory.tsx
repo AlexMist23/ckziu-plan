@@ -127,10 +127,10 @@ export default function TeacherDirectory() {
 
   return (
     <div className="container mx-auto p-4 min-h-screen flex flex-col">
-      <h1 className="text-3xl font-bold mb-4">Teacher Directory</h1>
+      <h1 className="text-3xl font-bold mb-4">Nauczyciele</h1>
       <Input
         type="text"
-        placeholder="Search teachers..."
+        placeholder="Szukaj..."
         value={searchTerm}
         onChange={handleSearch}
         className="mb-4"
@@ -141,22 +141,22 @@ export default function TeacherDirectory() {
             <TableRow>
               <TableHead className="w-[150px]">
                 <Button variant="ghost" onClick={() => handleSort("subject")}>
-                  Subject <ArrowUpDown className="ml-2 h-4 w-4" />
+                  Przedmiot <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
               <TableHead>
                 <Button variant="ghost" onClick={() => handleSort("name")}>
-                  Name <ArrowUpDown className="ml-2 h-4 w-4" />
+                  Imię <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
               <TableHead>
                 <Button variant="ghost" onClick={() => handleSort("surname")}>
-                  Surname <ArrowUpDown className="ml-2 h-4 w-4" />
+                  Nazwisko <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
               <TableHead className="hidden md:table-cell">
                 <Button variant="ghost" onClick={() => handleSort("e-mail")}>
-                  Email <ArrowUpDown className="ml-2 h-4 w-4" />
+                  E-mail <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
             </TableRow>
@@ -164,7 +164,9 @@ export default function TeacherDirectory() {
           <TableBody>
             {teachers.map((teacher, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">{teacher.subject}</TableCell>
+                <TableCell className="font-semibold">
+                  {teacher.subject}
+                </TableCell>
                 <TableCell>{teacher.name}</TableCell>
                 <TableCell>{teacher.surname}</TableCell>
                 <TableCell className="hidden md:table-cell">
