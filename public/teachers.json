@@ -1,0 +1,74 @@
+[
+  {
+    "subject": "wychowawczyni",
+    "name": "barbara",
+    "surname": "szczemier-szczemierska",
+    "e-mail": "b.szczemier-szczemierska@zsp7.edu.gdansk.pl"
+  },
+  {
+    "subject": "biologia",
+    "name": "danuta",
+    "surname": "jabłońska",
+    "e-mail": "d.jablonska@ckzu1.edu.gdansk.pl"
+  },
+  {
+    "subject": "chemia",
+    "name": "teresa",
+    "surname": "kubiarczyk",
+    "e-mail": "t.kubiarczyk-kazalska@ckzu1.edu.gdansk.pl"
+  },
+  {
+    "subject": "geografia",
+    "name": "andrzej",
+    "surname": "saładiak",
+    "e-mail": "a.saladiak@ckzu1.edu.gdansk.pl"
+  },
+  {
+    "subject": "historia",
+    "name": "sławomir",
+    "surname": "komorowski",
+    "e-mail": "s.komorowski@ckzu1.edu.gdansk.pl"
+  },
+  {
+    "subject": "j. angielski",
+    "name": "nikola",
+    "surname": "grzywacz",
+    "e-mail": "n.grzywacz@ckzu1.edu.gdansk.pl"
+  },
+  {
+    "subject": "j. angielski",
+    "name": "iwona",
+    "surname": "lehman",
+    "e-mail": "i.lehman@lo15.edu.gdansk.pl"
+  },
+  {
+    "subject": "j. angielski",
+    "name": "iwona",
+    "surname": "lehman",
+    "e-mail": "i.lehman@lo15.edu.gdansk.pl"
+  },
+  {
+    "subject": "j. polski",
+    "name": "barbara",
+    "surname": "szczemier-szczemierska",
+    "e-mail": "b.szczemier-szczemierska@zsp7.edu.gdansk.pl"
+  },
+  {
+    "subject": "konferencja",
+    "name": "barbara",
+    "surname": "szczemier-szczemierska",
+    "e-mail": "b.szczemier-szczemierska@zsp7.edu.gdansk.pl"
+  },
+  {
+    "subject": "matematyka",
+    "name": "anna",
+    "surname": "łotowska",
+    "e-mail": "a.lotowska@sp2.edu.gdansk.pl"
+  },
+  {
+    "subject": "wos",
+    "name": "michał",
+    "surname": "stelmaszczyk",
+    "e-mail": "m.stelmaszczyk@ckzu1.edu.gdansk.pl"
+  }
+]
