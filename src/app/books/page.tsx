@@ -84,7 +84,7 @@ export default function PDFLibrary() {
               <CardDescription>{book.subject}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow relative overflow-hidden">
-              <AspectRatio ratio={16 / 9} className="bg-muted">
+              <AspectRatio ratio={16 / 9} className="bg-muted overflow-hidden">
                 {book.image ? (
                   <div className="relative w-full h-full transform transition-transform duration-300 group-hover:scale-105">
                     <Image
@@ -93,8 +93,7 @@ export default function PDFLibrary() {
                       fill
                       className="object-cover rounded-md"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                      <BookOpenIcon className="text-white w-12 h-12" />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75">
                     </div>
                   </div>
                 ) : (
@@ -106,7 +105,7 @@ export default function PDFLibrary() {
             </CardContent>
             <CardFooter className="flex justify-between gap-2">
               <Button
-                className="flex-1 transition-colors duration-300 hover:bg-blue-600"
+                className="flex-1 "
                 onClick={() =>
                   window.open(`/static/pdf/${book.fileName}`, "_blank")
                 }
@@ -115,7 +114,7 @@ export default function PDFLibrary() {
               </Button>
               <Button
                 variant="outline"
-                className="flex-1 transition-colors duration-300 hover:bg-gray-100"
+                className="flex-1"
                 onClick={() => handleDownload(book.fileName)}
               >
                 <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
