@@ -164,7 +164,7 @@ export default function TeacherDirectory() {
           <TableBody>
             {teachers.map((teacher, index) => (
               <>
-                <TableRow key={index} className="md:mb-0 mb-5">
+                <TableRow key={index} className="">
                   <TableCell className="font-semibold">
                     {teacher.subject}
                   </TableCell>
@@ -174,9 +174,16 @@ export default function TeacherDirectory() {
                     {teacher["e-mail"]}
                   </TableCell>
                 </TableRow>
+
                 <TableRow key={"2/" + index} className="md:hidden">
-                  {" "}
-                  <TableCell className="">{teacher["e-mail"]}</TableCell>
+                  <TableCell className="text-background">
+                    {"."}
+                    <span className="text-foreground absolute w-full cl">
+                      <a href={`mailto:${teacher["e-mail"]}}`}>
+                        {teacher["e-mail"]}
+                      </a>
+                    </span>
+                  </TableCell>
                 </TableRow>
               </>
             ))}

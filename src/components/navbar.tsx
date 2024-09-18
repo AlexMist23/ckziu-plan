@@ -38,14 +38,11 @@ export function Navbar() {
   const navLinks = [
     { href: "/schedule", label: "Plan" },
     { href: "/teachers", label: "Nauczyciele" },
-    { href: "https://edu.gdansk.pl/", label: "E-Dziennik" },
+    { href: "https://edu.gdansk.pl/", label: "EduDziennik" },
     {
       href: "https://ckziu1.gda.pl/plan-zajec#lo-tryb-zaoczny",
-      label: "ckziu1.gda.pl",
+      label: "ckziu1",
     },
-    { href: "/freq-calc", label: "Kalkulator frekwencji" },
-    { href: "/notes", label: "Notatki" },
-    { href: "/resources", label: "Książki" },
   ];
 
   return (
