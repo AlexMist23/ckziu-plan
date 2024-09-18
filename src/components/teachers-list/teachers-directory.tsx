@@ -163,16 +163,22 @@ export default function TeacherDirectory() {
           </TableHeader>
           <TableBody>
             {teachers.map((teacher, index) => (
-              <TableRow key={index}>
-                <TableCell className="font-semibold">
-                  {teacher.subject}
-                </TableCell>
-                <TableCell>{teacher.name}</TableCell>
-                <TableCell>{teacher.surname}</TableCell>
-                <TableCell className="hidden md:table-cell">
-                  {teacher["e-mail"]}
-                </TableCell>
-              </TableRow>
+              <>
+                <TableRow key={index} className="md:mb-0 mb-5">
+                  <TableCell className="font-semibold">
+                    {teacher.subject}
+                  </TableCell>
+                  <TableCell>{teacher.name}</TableCell>
+                  <TableCell>{teacher.surname}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {teacher["e-mail"]}
+                  </TableCell>
+                </TableRow>
+                <TableRow key={"2/" + index} className="md:hidden">
+                  {" "}
+                  <TableCell className="">{teacher["e-mail"]}</TableCell>
+                </TableRow>
+              </>
             ))}
           </TableBody>
         </Table>
