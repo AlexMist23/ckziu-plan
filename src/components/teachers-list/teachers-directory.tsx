@@ -65,9 +65,9 @@ const teachersData: Teacher[] = [
   },
   {
     subject: "j. polski",
-    name: "barbara",
-    surname: "szczemier-szczemierska",
-    "e-mail": "b.szczemier-szczemierska@zsp7.edu.gdansk.pl",
+    name: "teresa",
+    surname: "kubiarczyk-kazalska",
+    "e-mail": "t.kubiarczyk-kazalska@ckzu1.edu.gdansk.pl",
   },
   {
     subject: "konferencja",
@@ -168,8 +168,10 @@ export default function TeacherDirectory() {
                   <TableCell className="font-semibold">
                     {teacher.subject}
                   </TableCell>
-                  <TableCell>{teacher.name}</TableCell>
-                  <TableCell>{teacher.surname}</TableCell>
+                  <TableCell className="capitalize">{teacher.name}</TableCell>
+                  <TableCell className="capitalize">
+                    {teacher.surname}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {teacher["e-mail"]}
                   </TableCell>
