@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { saveData } from "./actions";
 import { LucideClock, LucideDoorClosed, LucideUser } from "lucide-react";
-import { Card, CardContent } from "../ui/card";
 
 type LessonData = {
   Subject: string;
