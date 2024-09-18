@@ -3,8 +3,8 @@ import Schedule from "@/components/editable-shedule/schedule-container";
 
 export default function Home() {
   return (
-    <main className="flex-col min-h-screen">
+    <div className="container mx-auto p-4">
       <Schedule />
-    </main>
+    </div>
   );
 }

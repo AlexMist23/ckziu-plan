@@ -69,7 +69,7 @@ export default function PDFLibrary() {
       <div className="relative mb-6">
         <Input
           type="text"
-          placeholder="Search books..."
+          placeholder="Szukaj książki..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-10"
@@ -111,14 +111,14 @@ export default function PDFLibrary() {
                   window.open(`/static/pdf/${book.fileName}`, "_blank")
                 }
               >
-                <BookOpenIcon className="mr-2 h-4 w-4" /> Open
+                <BookOpenIcon className="mr-2 h-4 w-4" /> Otwórz
               </Button>
               <Button
                 variant="outline"
                 className="flex-1 transition-colors duration-300 hover:bg-gray-100"
                 onClick={() => handleDownload(book.fileName)}
               >
-                <DownloadIcon className="mr-2 h-4 w-4" /> Download
+                <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
               </Button>
             </CardFooter>
           </Card>

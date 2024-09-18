@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, SearchIcon } from "lucide-react";
+import { Card, CardContent } from "../ui/card";
 
 type Teacher = {
   subject: string;
@@ -126,72 +127,77 @@ export default function TeacherDirectory() {
   };
 
   return (
-    <div className="container mx-auto p-4 min-h-screen flex flex-col">
-      <h1 className="text-3xl font-bold mb-4">Nauczyciele</h1>
-      <Input
-        type="text"
-        placeholder="Szukaj..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="mb-4"
-      />
-      <div className="overflow-x-auto flex-grow">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[150px]">
-                <Button variant="ghost" onClick={() => handleSort("subject")}>
-                  Przedmiot <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-              <TableHead>
-                <Button variant="ghost" onClick={() => handleSort("name")}>
-                  Imię <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-              <TableHead>
-                <Button variant="ghost" onClick={() => handleSort("surname")}>
-                  Nazwisko <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-              <TableHead className="hidden md:table-cell">
-                <Button variant="ghost" onClick={() => handleSort("e-mail")}>
-                  E-mail <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {teachers.map((teacher, index) => (
-              <>
-                <TableRow key={index} className="">
-                  <TableCell className="font-semibold">
-                    {teacher.subject}
-                  </TableCell>
-                  <TableCell className="capitalize">{teacher.name}</TableCell>
-                  <TableCell className="capitalize">
-                    {teacher.surname}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {teacher["e-mail"]}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow key={"2/" + index} className="md:hidden">
-                  <TableCell className="text-background">
-                    {"."}
-                    <span className="text-primary absolute w-full cl">
-                      <a href={`mailto:${teacher["e-mail"]}}`}>
-                        {teacher["e-mail"]}
-                      </a>
-                    </span>
-                  </TableCell>
-                </TableRow>
-              </>
-            ))}
-          </TableBody>
-        </Table>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Nauczyciele</h1>
+      <div className="relative mb-6">
+        <Input
+          type="text"
+          placeholder="Szukaj nauczyciela..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="pl-10"
+        />
+        <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
       </div>
+      <Card className="">
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[150px]">
+                  <Button variant="ghost" onClick={() => handleSort("subject")}>
+                    Przedmiot <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead>
+                  <Button variant="ghost" onClick={() => handleSort("name")}>
+                    Imię <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead>
+                  <Button variant="ghost" onClick={() => handleSort("surname")}>
+                    Nazwisko <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead className="hidden md:table-cell">
+                  <Button variant="ghost" onClick={() => handleSort("e-mail")}>
+                    E-mail <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {teachers.map((teacher, index) => (
+                <>
+                  <TableRow key={index} className="">
+                    <TableCell className="font-semibold">
+                      {teacher.subject}
+                    </TableCell>
+                    <TableCell className="capitalize">{teacher.name}</TableCell>
+                    <TableCell className="capitalize">
+                      {teacher.surname}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {teacher["e-mail"]}
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow key={"2/" + index} className="md:hidden">
+                    <TableCell className="text-background">
+                      {"."}
+                      <span className="text-primary absolute w-full cl">
+                        <a href={`mailto:${teacher["e-mail"]}}`}>
+                          {teacher["e-mail"]}
+                        </a>
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
