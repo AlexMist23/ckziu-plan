@@ -3,7 +3,7 @@ import Schedule from "@/components/editable-shedule/schedule-container";
 
 export default function Home() {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto pt-4">
       <Schedule />
     </div>
   );

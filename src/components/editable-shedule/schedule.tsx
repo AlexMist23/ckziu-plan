@@ -102,8 +102,8 @@ export default function DateTabbedEditableSchedule({
   };
 
   return (
-    <Tabs defaultValue={nearestDate}>
-      <TabsList className="mb-4">
+    <Tabs defaultValue={nearestDate} className="p-0">
+      <TabsList className="mb-4 mx-4">
         {sortedDates.map((date) => (
           <TabsTrigger key={date} value={date}>
             {new Date(date).toLocaleDateString("pl-PL", {
@@ -115,12 +115,12 @@ export default function DateTabbedEditableSchedule({
       </TabsList>
       {sortedDates.map((date) => (
         <TabsContent key={date} value={date}>
-          <Card>
-            <CardContent className="px-0 md:px-6">
+          <Card className="p-0">
+            <CardContent className="px-0 md:px-6 pt-6">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>#</TableHead>
+                    <TableHead className="hidden md:table-cell">#</TableHead>
                     <TableHead>
                       <LucideClock />
                     </TableHead>
@@ -137,7 +137,9 @@ export default function DateTabbedEditableSchedule({
                   {Object.entries(data[date]).map(([period, lessons]) =>
                     lessons.map((lesson, index) => (
                       <TableRow key={`${date}-${period}-${index}`}>
-                        <TableCell>{period}</TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {period}
+                        </TableCell>
                         <TableCell>{`${lesson.Time[0]} - ${lesson.Time[1]}`}</TableCell>
                         <TableCell>
                           {editingCell?.date === date &&

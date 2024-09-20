@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "@/hooks/use-toast";
 import jsPDF from "jspdf";
+import { CardContent, CardFooter } from "./ui/card";
 
 export default function ImageDownloader() {
   const [baseUrl, setBaseUrl] = useState("");
@@ -108,28 +109,38 @@ export default function ImageDownloader() {
   };
 
   return (
-    <div>
-      <Label htmlFor="base-url">Base URL</Label>
-      <Input
-        id="base-url"
-        value={baseUrl}
-        onChange={(e) => setBaseUrl(e.target.value)}
-        placeholder="Enter base URL"
-      />
-      <Label htmlFor="image-count">Number of Pages</Label>
-      <Input
-        id="image-count"
-        type="number"
-        value={imageCount}
-        onChange={(e) => setImageCount(parseInt(e.target.value))}
-        min="1"
-      />
-      <Button onClick={downloadImages} disabled={isDownloading}>
-        {isDownloading ? "Downloading..." : "Download Images"}
-      </Button>
-      {isDownloading && <Progress value={progress} />}
-      {images.length > 0 && <Button onClick={createPDF}>Create PDF</Button>}
-      <Button onClick={downloadFirstImage}>Download First Image</Button>
-    </div>
+    <>
+      <CardContent>
+        <Label htmlFor="base-url">Base URL</Label>
+        <Input
+          id="base-url"
+          value={baseUrl}
+          onChange={(e) => setBaseUrl(e.target.value)}
+          placeholder="Enter base URL"
+        />
+        <Label htmlFor="image-count">Number of Pages</Label>
+        <Input
+          id="image-count"
+          type="number"
+          value={imageCount}
+          onChange={(e) => setImageCount(parseInt(e.target.value))}
+          min="1"
+        />
+      </CardContent>
+      <CardFooter className="flex flex-row justify-around">
+        <div className="mt-4 flex-col pb-2">
+          <Button onClick={downloadImages} disabled={isDownloading}>
+            {isDownloading ? `Downloading...` : "Download Images"}
+          </Button>
+          <Progress value={isDownloading ? progress : 0} />
+        </div>
+
+        <Button disabled={images.length > 0 ? false : true} onClick={createPDF}>
+          Create PDF
+        </Button>
+
+        <Button onClick={downloadFirstImage}>Download First Image</Button>
+      </CardFooter>
+    </>
   );
 }

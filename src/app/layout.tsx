@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen w-lvw overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"
@@ -37,7 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col bg-background">
+          <div className="flex flex-col bg-background">
             <Navbar />
             <NavbarSpacer />
             {children}

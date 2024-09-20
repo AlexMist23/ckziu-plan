@@ -58,17 +58,12 @@ export function Navbar() {
     { href: "/teachers", label: "Nauczyciele" },
     { href: "/books", label: "Książki" },
     { href: "/flipbook-download-tool", label: "flipbookDownloadTool" },
-    { href: "https://edu.gdansk.pl/", label: "EduDziennik" },
-    {
-      href: "https://ckziu1.gda.pl/plan-zajec#lo-tryb-zaoczny",
-      label: "ckziu1",
-    },
   ];
 
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 bg-background/80 backdrop-blur transition-all duration-75",
+        "fixed w-svw z-50 bg-background/80 backdrop-blur transition-all duration-75",
         isScrolled ? "border-b shadow-sm" : ""
       )}
     >

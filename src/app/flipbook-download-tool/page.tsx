@@ -1,10 +1,16 @@
 import ImageDownloader from "@/components/ImageDownloader";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ImageDownloaderPage() {
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Flipbook Downloader</h1>
-      <ImageDownloader />
+      <Card>
+        <CardHeader>
+          <CardTitle>Flipbook Downloader</CardTitle>
+        </CardHeader>
+
+        <ImageDownloader />
+      </Card>
     </div>
   );
 }

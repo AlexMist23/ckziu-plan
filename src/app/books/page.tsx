@@ -132,13 +132,13 @@ export default function PDFLibrary() {
                 fill
                 src={"/static/images/" + book.image}
                 alt={book.title}
-                className="object-cover "
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75"></div>
-              <div className="absolute inset-0 flex flex-col justify-between  bg-gradient-to-t from-black via-transparent to-transparent">
-                <div className="backdrop-blur-[2px] p-4 bg-background/30">
+              <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-black via-transparent to-transparent">
+                <div className="text-white backdrop-blur-[1px] p-4 bg-gradient-to-b from-black to-transparent pb-10">
                   <CardTitle>{book.title}</CardTitle>
-                  <CardDescription className="text-primary">
+                  <CardDescription className="text-white">
                     {book.subject}
                   </CardDescription>
                 </div>
