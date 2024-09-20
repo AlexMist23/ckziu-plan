@@ -26,6 +26,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
+  const themeToggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +34,12 @@ export function Navbar() {
     };
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        themeToggleRef.current &&
+        !themeToggleRef.current.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -51,6 +57,7 @@ export function Navbar() {
     { href: "/schedule", label: "Plan" },
     { href: "/teachers", label: "Nauczyciele" },
     { href: "/books", label: "Książki" },
+    { href: "/flipbook-download-tool", label: "flipbookDownloadTool" },
     { href: "https://edu.gdansk.pl/", label: "EduDziennik" },
     {
       href: "https://ckziu1.gda.pl/plan-zajec#lo-tryb-zaoczny",
@@ -61,7 +68,7 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed w-lvw z-50 bg-background/80 backdrop-blur transition-all duration-75",
+        "fixed w-full z-50 bg-background/80 backdrop-blur transition-all duration-75",
         isScrolled ? "border-b shadow-sm" : ""
       )}
     >
@@ -165,13 +172,18 @@ export function Navbar() {
           <div className="pt-4 pb-3 border-t border-gray-700">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="ml-2">
+                <Button
+                  ref={themeToggleRef}
+                  variant="outline"
+                  size="icon"
+                  className="ml-2"
+                >
                   <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                   <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                   <span className="sr-only">Toggle theme</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" ref={menuRef}>
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                   Light
                 </DropdownMenuItem>

@@ -2,14 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FileIcon, SearchIcon, BookOpenIcon, DownloadIcon } from "lucide-react";
+import { SearchIcon, BookOpenIcon, DownloadIcon } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Book {
@@ -128,47 +121,46 @@ export default function PDFLibrary() {
           </SelectContent>
         </Select>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredBooks.map((book) => (
-          <Card key={book.pdf} className="flex flex-col group">
-            <CardHeader>
-              <CardTitle className="line-clamp-1">{book.title}</CardTitle>
-              <CardDescription>{book.subject}</CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow relative overflow-hidden">
-              <AspectRatio ratio={16 / 9} className="bg-muted overflow-hidden">
-                {book.image ? (
-                  <div className="relative w-full h-full transform transition-transform duration-300 group-hover:scale-105">
-                    <Image
-                      fill
-                      src={"/static/images/" + book.image}
-                      alt={book.title}
-                      className="object-cover rounded-md"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75"></div>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center h-full">
-                    <FileIcon size={64} className="text-gray-400" />
-                  </div>
-                )}
-              </AspectRatio>
-            </CardContent>
-            <CardFooter className="flex justify-between gap-2">
-              <Button
-                className="flex-1"
-                onClick={() => window.open(`/static/pdf/${book.pdf}`, "_blank")}
-              >
-                <BookOpenIcon className="mr-2 h-4 w-4" /> Otwórz
-              </Button>
-              <Button
-                variant="outline"
-                className="flex-1"
-                onClick={() => handleDownload(book.pdf)}
-              >
-                <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
-              </Button>
-            </CardFooter>
+          <Card
+            key={book.pdf}
+            className="relative overflow-hidden shadow-lg rounded-lg"
+          >
+            <AspectRatio ratio={1 / 1.4} className="">
+              <Image
+                fill
+                src={"/static/images/" + book.image}
+                alt={book.title}
+                className="object-cover "
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75"></div>
+              <div className="absolute inset-0 flex flex-col justify-between  bg-gradient-to-t from-black via-transparent to-transparent">
+                <div className="backdrop-blur-[2px] p-4 bg-background/30">
+                  <CardTitle>{book.title}</CardTitle>
+                  <CardDescription className="text-primary">
+                    {book.subject}
+                  </CardDescription>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Button
+                    className="flex-1 mx-4"
+                    onClick={() =>
+                      window.open(`/static/pdf/${book.pdf}`, "_blank")
+                    }
+                  >
+                    <BookOpenIcon className="mr-2 h-4 w-4" /> Otwórz
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 mx-4 mb-4"
+                    onClick={() => handleDownload(book.pdf)}
+                  >
+                    <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
+                  </Button>
+                </div>
+              </div>
+            </AspectRatio>
           </Card>
         ))}
       </div>

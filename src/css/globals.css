@@ -12,6 +12,30 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .skeleton {
+    @apply bg-gray-300 rounded-md relative overflow-hidden;
+  }
+
+  .skeleton::before {
+    content: "";
+    @apply absolute top-0 left-0 h-full w-full bg-gradient-to-r from-transparent via-white to-transparent;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    50% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
 }
 
 
