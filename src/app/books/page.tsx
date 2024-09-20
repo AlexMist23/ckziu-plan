@@ -121,7 +121,7 @@ export default function PDFLibrary() {
           </SelectContent>
         </Select>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredBooks.map((book) => (
           <Card
             key={book.pdf}
@@ -142,21 +142,21 @@ export default function PDFLibrary() {
                     {book.subject}
                   </CardDescription>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex justify-between flex-row gap-2 m-2 md:gap-4 md:m-4">
                   <Button
-                    className="flex-1 mx-4"
+                    className="w-1/2"
                     onClick={() =>
                       window.open(`/static/pdf/${book.pdf}`, "_blank")
                     }
                   >
-                    <BookOpenIcon className="mr-2 h-4 w-4" /> Otwórz
+                    <BookOpenIcon className="h-4" />
                   </Button>
                   <Button
                     variant="outline"
-                    className="flex-1 mx-4 mb-4"
+                    className=" w-1/2"
                     onClick={() => handleDownload(book.pdf)}
                   >
-                    <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
+                    <DownloadIcon className="h-4 " />
                   </Button>
                 </div>
               </div>
