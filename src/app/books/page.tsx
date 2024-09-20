@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -11,48 +12,68 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { FileIcon, SearchIcon, BookOpenIcon, DownloadIcon } from "lucide-react";
-import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Book {
   title: string;
-  fileName: string;
   subject: string;
-  image?: string;
+  pdf: string;
+  image: string;
+  class: number;
 }
 
-const books: Book[] = [
-  {
-    title: "W Centrum Uwagi",
-    subject: "Wiedza o społeczeństwie",
-    fileName: "wos-w-centrum-uwagi.pdf",
-    image: "/static/images/w-centrum-uwagi.webp",
-  },
-  {
-    title: "Biologia Na Czasie 1",
-    subject: "Biologia",
-    fileName: "biologia-na-czasie-1.pdf",
-    image: "/static/images/biologia-na-czasie-1.webp",
-  },
-  {
-    title: "Biologia Na Czasie 3",
-    subject: "Biologia",
-    fileName: "biologia-na-czasie-3.pdf",
-    image: "/static/images/biologia-na-czasie-3.webp",
-  },
-];
-
 export default function PDFLibrary() {
+  const [books, setBooks] = useState<Book[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredBooks, setFilteredBooks] = useState<Book[]>(books);
+  const [selectedSubject, setSelectedSubject] = useState<string>("all");
+  const [selectedClass, setSelectedClass] = useState<string>("1");
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    const filtered = books.filter((book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch("/api/pdf-files");
+        if (!response.ok) {
+          throw new Error("Failed to fetch books");
+        }
+        const data = await response.json();
+
+        setBooks(data);
+        setFilteredBooks(data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  const subjects = [
+    "all",
+    ...Array.from(new Set(books.map((book) => book.subject))),
+  ];
+  const classes = [
+    "all",
+    ...Array.from(new Set(books.map((book) => book.class.toString()))),
+  ].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+  useEffect(() => {
+    const filtered = books.filter(
+      (book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (selectedSubject === "all" || book.subject === selectedSubject) &&
+        (selectedClass === "all" || book.class.toString() === selectedClass)
     );
     setFilteredBooks(filtered);
-  }, [searchTerm]);
+  }, [searchTerm, selectedSubject, selectedClass, books]);
 
   const handleDownload = (fileName: string) => {
     const link = document.createElement("a");
@@ -65,20 +86,51 @@ export default function PDFLibrary() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Książki</h1>
-      <div className="relative mb-6">
-        <Input
-          type="text"
-          placeholder="Szukaj książki..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10"
-        />
-        <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="relative flex-grow">
+          <Input
+            type="text"
+            placeholder="Szukaj..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
+          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        </div>
+        <Select
+          value={selectedSubject}
+          onValueChange={(value) => setSelectedSubject(value)}
+        >
+          <SelectTrigger className="w-full md:w-[180px]">
+            <SelectValue placeholder="Przedmiot" />
+          </SelectTrigger>
+          <SelectContent>
+            {subjects.map((subject) => (
+              <SelectItem key={subject} value={subject}>
+                {subject === "all" ? "Wszystkie przedmioty" : subject}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select
+          value={selectedClass}
+          onValueChange={(value) => setSelectedClass(value)}
+        >
+          <SelectTrigger className="w-full md:w-[180px]">
+            <SelectValue placeholder="Klasa" />
+          </SelectTrigger>
+          <SelectContent>
+            {classes.map((classNum) => (
+              <SelectItem key={classNum} value={classNum}>
+                {classNum === "all" ? "Wszystkie klasy" : "Klasa " + classNum}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBooks.map((book) => (
-          <Card key={book.fileName} className="flex flex-col group">
+          <Card key={book.pdf} className="flex flex-col group">
             <CardHeader>
               <CardTitle className="line-clamp-1">{book.title}</CardTitle>
               <CardDescription>{book.subject}</CardDescription>
@@ -88,13 +140,12 @@ export default function PDFLibrary() {
                 {book.image ? (
                   <div className="relative w-full h-full transform transition-transform duration-300 group-hover:scale-105">
                     <Image
-                      src={book.image}
-                      alt={book.title}
                       fill
+                      src={"/static/images/" + book.image}
+                      alt={book.title}
                       className="object-cover rounded-md"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75">
-                    </div>
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-75"></div>
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-full">
@@ -105,17 +156,15 @@ export default function PDFLibrary() {
             </CardContent>
             <CardFooter className="flex justify-between gap-2">
               <Button
-                className="flex-1 "
-                onClick={() =>
-                  window.open(`/static/pdf/${book.fileName}`, "_blank")
-                }
+                className="flex-1"
+                onClick={() => window.open(`/static/pdf/${book.pdf}`, "_blank")}
               >
                 <BookOpenIcon className="mr-2 h-4 w-4" /> Otwórz
               </Button>
               <Button
                 variant="outline"
                 className="flex-1"
-                onClick={() => handleDownload(book.fileName)}
+                onClick={() => handleDownload(book.pdf)}
               >
                 <DownloadIcon className="mr-2 h-4 w-4" /> Pobierz
               </Button>

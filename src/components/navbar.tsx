@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
@@ -17,17 +17,17 @@ import { cn } from "@/lib/utils";
 import IconCkziu1Logo from "./icons/ckziu1-logo";
 
 export function NavbarSpacer() {
-  return <div className="h-14" />; // This matches the height of the navbar
+  return <div className="h-14" />;
 }
 
 export function Navbar() {
   const { setTheme } = useTheme();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const menuRef = React.useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -61,7 +61,7 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur transition-all duration-200",
+        "fixed w-lvw z-50 bg-background/80 backdrop-blur transition-all duration-75",
         isScrolled ? "border-b shadow-sm" : ""
       )}
     >

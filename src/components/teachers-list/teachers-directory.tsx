@@ -128,11 +128,10 @@ export default function TeacherDirectory() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Nauczyciele</h1>
       <div className="relative mb-6">
         <Input
           type="text"
-          placeholder="Szukaj nauczyciela..."
+          placeholder="Szukaj..."
           value={searchTerm}
           onChange={handleSearch}
           className="pl-10"

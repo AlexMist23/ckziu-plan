@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen `}
       >
@@ -37,9 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <NavbarSpacer />
-          <div className="relative flex min-h-screen flex-col bg-background">
+          <div className="flex min-h-screen flex-col bg-background">
+            <Navbar />
+            <NavbarSpacer />
             {children}
             <Footer />
           </div>
