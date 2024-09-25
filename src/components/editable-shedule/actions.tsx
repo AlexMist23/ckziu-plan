@@ -11,7 +11,7 @@ type LessonData = {
 }
 
 type DaySchedule = {
-  [key: string]: LessonData[]
+  [key: string]: LessonData
 }
 
 type ScheduleData = {
