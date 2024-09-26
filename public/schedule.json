@@ -7,7 +7,7 @@
       "Time": ["08:00", "09:30"]
     },
     "2": {
-      "Subject": "Wiedza o społeczeństwie",
+      "Subject": "wos",
       "Teacher_Initials": "M.S.",
       "Location": 106,
       "Time": ["09:40", "11:10"]
@@ -33,7 +33,7 @@
   },
   "2024-09-15": {
     "1": {
-      "Subject": "Język angielski - gr.1 / gr.2",
+      "Subject": "Język angielski - gr. 1 / gr. 2",
       "Teacher_Initials": "N.G. / I.L.",
       "Location": "9 / 7",
       "Time": ["08:00", "09:30"]

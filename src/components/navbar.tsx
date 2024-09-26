@@ -58,6 +58,7 @@ export function Navbar() {
     { href: "/teachers", label: "Nauczyciele" },
     { href: "/books", label: "Książki" },
     { href: "/flipbook-download-tool", label: "flipbookDownloadTool" },
+    { href: "/schedule-analysis", label: "Godziny" },
   ];
 
   return (
