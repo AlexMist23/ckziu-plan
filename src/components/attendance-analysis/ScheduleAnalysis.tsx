@@ -13,17 +13,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-
-import { getData } from "@/components/editable-shedule/actions"; // Adjust the import path as needed
+import { getData } from "@/app/actions"; // Adjust the import path as needed
+import ScheduleAnalysisBarChart from "./ScheduleAnalysisBarChart";
 
 type ScheduleEntry = {
   Subject: string;
@@ -43,6 +34,7 @@ type SubjectHours = {
 };
 
 const ScheduleAnalysis = () => {
+  const [scheduleData, setScheduleData] = useState<ScheduleData>({});
   const [subjectHours, setSubjectHours] = useState<SubjectHours>({});
   const [userAttendance, setUserAttendance] = useState<SubjectHours>({});
   const [attendancePercentage, setAttendancePercentage] = useState<
@@ -52,10 +44,14 @@ const ScheduleAnalysis = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData();
-      calculateSubjectHours(data);
+      setScheduleData(data);
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    calculateSubjectHours(scheduleData);
+  }, [scheduleData]);
 
   const calculateSubjectHours = (data: ScheduleData) => {
     const hours: SubjectHours = {};
@@ -131,31 +127,7 @@ const ScheduleAnalysis = () => {
           </div>
         </CardContent>
       </Card>
-
-      {attendancePercentage.length > 0 && (
-        <>
-          <Card>
-            <CardHeader>
-              <CardTitle>Attendance Percentage</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={attendancePercentage}>
-                  <XAxis dataKey="subject" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar
-                    dataKey="percentage"
-                    fill="#8884d8"
-                    name="Attendance %"
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </>
-      )}
+      <ScheduleAnalysisBarChart data={attendancePercentage} />
     </div>
   );
 };

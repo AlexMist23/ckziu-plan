@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import EditableSchedule from "./schedule";
-import { getData } from "./actions";
-import { Skeleton } from "../ui/skeleton";
+import { getData } from "@/app/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Schedule() {
   const data = await getData();
