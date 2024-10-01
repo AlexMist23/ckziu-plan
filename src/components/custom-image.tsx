@@ -22,6 +22,7 @@ export function CustomImage({ skeletonClassName, ...props }: CustomImageProps) {
         className={`${props.className} ${
           isLoading ? "opacity-0" : "opacity-100"
         } transition-opacity duration-300`}
+        alt="123"
       />
     </div>
   );
