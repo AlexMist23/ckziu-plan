@@ -142,7 +142,7 @@ export default function PDFLibrary() {
                     {book.subject}
                   </CardDescription>
                 </div>
-                <div className="flex justify-between flex-row gap-2 m-2 md:gap-4 md:m-4">
+                <div className="flex justify-between flex-row gap-2 md:gap-2 m-2">
                   <Button
                     className="w-1/2"
                     onClick={() =>
